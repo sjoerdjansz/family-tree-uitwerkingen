@@ -35,7 +35,7 @@ public class Person {
     public void setMother(Person mother) {
         this.mother = mother;
 
-        if (mother.children.contains(this)) {
+        if (!mother.children.contains(this)) {
             mother.children.add(this);
         } else {
             System.out.println("Mother of child has already been set");
@@ -117,9 +117,9 @@ public class Person {
         if (!children.contains(child)) {
             children.add(child);
 
-            if("male".equalsIgnoreCase(sex)) {
+            if ("male".equalsIgnoreCase(sex)) {
                 child.setFather(this);
-            } else if("female".equalsIgnoreCase(sex)) {
+            } else if ("female".equalsIgnoreCase(sex)) {
                 child.setMother(this);
             }
         } else {
@@ -132,7 +132,7 @@ public class Person {
     }
 
     public void addSiblings(Person sibling) {
-        if (siblings.contains(sibling)) {
+        if (!siblings.contains(sibling)) {
             siblings.add(sibling);
         } else {
             System.out.println("Sibling already added!");
