@@ -1,11 +1,12 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
+    private final List<Person> siblings = new ArrayList<>();
+    private final List<Person> children = new ArrayList<>();
+    private final List<Pet> pets = new ArrayList<>();
     private Person mother;
     private Person father;
-    private List<Person> siblings;
-    private List<Person> children;
-    private List<Pet> pets;
     private String name;
     private String middleName;
     private String lastName;
@@ -33,6 +34,12 @@ public class Person {
 
     public void setMother(Person mother) {
         this.mother = mother;
+
+        if (mother.children.contains(this)) {
+            mother.children.add(this);
+        } else {
+            System.out.println("Mother of child has already been set");
+        }
     }
 
     public Person getFather() {
@@ -41,30 +48,24 @@ public class Person {
 
     public void setFather(Person father) {
         this.father = father;
+        if (!father.children.contains(this)) {
+            father.children.add(this);
+        } else {
+            System.out.println("Father of child has already been set");
+        }
     }
 
     public List<Person> getSiblings() {
         return siblings;
     }
 
-    public void setSiblings(List<Person> siblins) {
-        this.siblings = siblins;
-    }
 
     public List<Person> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Person> children) {
-        this.children = children;
-    }
-
     public List<Pet> getPets() {
         return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
     }
 
     public String getName() {
@@ -79,8 +80,8 @@ public class Person {
         return middleName;
     }
 
-    public void setMiddleName(String lastName) {
-        this.lastName = lastName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getLastName() {
@@ -107,25 +108,50 @@ public class Person {
         this.age = age;
     }
 
-    public void addParents() {
-
+    public void addParents(Person father, Person mother) {
+        setFather(father);
+        setMother(mother);
     }
 
-    public void addChild() {
+    public void addChild(Person child) {
+        if (!children.contains(child)) {
+            children.add(child);
 
+            if("male".equalsIgnoreCase(sex)) {
+                child.setFather(this);
+            } else if("female".equalsIgnoreCase(sex)) {
+                child.setMother(this);
+            }
+        } else {
+            System.out.println("Child already added!");
+        }
     }
 
-    public void addPet() {
-
+    public void addPet(Pet pet) {
+        pets.add(pet);
     }
 
-    public void addSiblings() {
-
+    public void addSiblings(Person sibling) {
+        if (siblings.contains(sibling)) {
+            siblings.add(sibling);
+        } else {
+            System.out.println("Sibling already added!");
+        }
     }
 
-    public void getGrandChildren() {
+    public List<Person> getGrandChildren() {
+        List<Person> grandChildren = new ArrayList<>();
 
+        for (Person child : children) {
+            grandChildren.addAll(child.getChildren());
+        }
+
+        return grandChildren;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + lastName;
+    }
 
 }

@@ -4,7 +4,7 @@ public class Pet {
     private String name;
     private int age;
     private String species;
-    private List<Person> owner;
+    private Person owner;
 
     public Pet(String name, int age, String species) {
         this.name = name;
@@ -36,11 +36,11 @@ public class Pet {
         this.species = species;
     }
 
-    public List<Person> getOwner() {
+    public Person getOwner() {
         return owner;
     }
 
-    public void setOwner(List<Person> owner) {
+    public void setOwner(Person owner) {
         this.owner = owner;
     }
 }
