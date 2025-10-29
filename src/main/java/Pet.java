@@ -41,4 +41,9 @@ public class Pet {
     public void setOwner(Person owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

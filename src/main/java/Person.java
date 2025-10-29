@@ -7,6 +7,7 @@ public class Person {
     private final List<Pet> pets = new ArrayList<>();
     private Person mother;
     private Person father;
+    private Person partner;
     private String name;
     private String middleName;
     private String lastName;
@@ -26,6 +27,17 @@ public class Person {
         this.lastName = lastName;
         this.age = age;
         this.sex = sex;
+    }
+
+    public Person getPartner() {
+        return partner;
+    }
+
+    public void setPartner(Person partner) {
+        this.partner = partner;
+        if(partner.partner != this) {
+            partner.setPartner(this);
+        }
     }
 
     public Person getMother() {
@@ -149,9 +161,27 @@ public class Person {
         return grandChildren;
     }
 
+
+    public List<Pet> getPetsFromGrandChildren() {
+        var grandChildren = this.getGrandChildren();
+
+        System.out.println(this.getName() + " has " + this.getGrandChildren().size() + " grandchildren");
+        if(grandChildren.isEmpty()) {
+            System.out.println("No grandchildren found");
+        }
+        List<Pet> pets = new ArrayList<>();
+
+        for(Person grandChild : grandChildren) {
+            System.out.println("Looking for pets...");
+            pets.addAll(grandChild.getPets());
+        }
+        System.out.println("Pets from grandchildren found: " + pets.size());
+        return pets;
+    }
+
+
     @Override
     public String toString() {
         return name + " " + lastName;
     }
-
 }

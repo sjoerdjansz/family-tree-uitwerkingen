@@ -14,6 +14,11 @@ public class Main {
         Person cato = new Person("Cato", "Jansz", 3, "female");
         Person abel = new Person("Abel", "Jansz", 1, "male");
         Person hankTheTank = new Person("Hank", "the Tank", 2, "male");
+        Pet catosCat = new Pet("catosCat", 9, "Britse Korthaar");
+        Pet abelsDog = new Pet("abelsDog", 8, "Husky");
+        Pet abelsOtherDog = new Pet("abelsOtherDog", 4, "Husky");
+
+
 
         sjoerd.addParents(fred, nelleke);
         jasper.addParents(fred, nelleke);
@@ -24,9 +29,14 @@ public class Main {
 
         cato.addParents(jasper, anemone);
         abel.addParents(jasper, anemone);
+        cato.addPet(catosCat);
+        abel.addPet(abelsDog);
+        abel.addPet(abelsOtherDog);
         jasper.addSiblings(sjoerd);
-        jasper.addChild(cato);
         jasper.addSiblings(nienke);
+        jasper.setPartner(anemone);
+        System.out.println("Jasper' partner is: " + jasper.getPartner());
+
         nienke.addSiblings(sjoerd);
         nienke.addSiblings(jasper);
 
@@ -35,6 +45,10 @@ public class Main {
 
         nienke.addChild(hankTheTank);
 
+        var grandChildrensPets = fred.getPetsFromGrandChildren();
+
         System.out.println(fred.getGrandChildren().toString());
+        System.out.println(grandChildrensPets.toString());
+
     }
 }
